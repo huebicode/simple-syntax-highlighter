@@ -10,15 +10,23 @@ function highlightSyntax() {
     if (!codeBlocks.length) return
 
     // colors ------------------------------------------------------------------
-    const green = 'rgb(125, 230, 170)'
-    const blue = 'rgb(105, 185, 250)'
-    const pink = 'rgb(250, 105, 145)'
-    const grey = 'rgb(122, 121, 126)'
-    const foreground = 'rgb(221, 220, 229)'
-    const background = 'rgb(43, 42, 42)'
+    const green = '#7ea'
+    const blue = '#6bf'
+    const pink = '#f69'
+    const grey = '#777'
+    const foreground = '#dde'
+    const background = '#222'
 
     // search patterns ---------------------------------------------------------
-    const keywords = /\b(?:function|func|fn|def|int|float|string|const|let|var|if|else|for|while|class|import|export|from|in|undefined)\b/
+    const _keywords = [
+        'function', 'const', 'let', 'var', 'class',
+        'if', 'else', 'for', 'while',
+        'int', 'float', 'string',
+        'import', 'export', 'from',
+        'undefined'
+    ].join('|')
+    const keywords = new RegExp(`\\b(?:${_keywords})\\b`)
+
     const numbers = /\d+(?:\.\d+)?/
     const functions = /\b\w+\s*(?=\()/
     const xmlTags = /(?<=&lt;\/?)\w+/

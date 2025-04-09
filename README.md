@@ -1,7 +1,7 @@
 # Simple Syntax Highlighter
 A simple, customizable, and extendable Syntax Highlighter in vanilla JavaScript.
 
-Import the script in the header with: 
+Import the script with: 
 
 ```html
 <script src="simple-syntax-highlighter.js"></script>
