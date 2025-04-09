@@ -19,10 +19,12 @@ function highlightSyntax() {
 
     // search patterns ---------------------------------------------------------
     const _keywords = [
-        'function', 'const', 'let', 'var', 'class',
+        'function', 'func', 'fn', 'def',
+        'class', 'constructor', 'extends', 'super',
+        'const', 'let', 'var',
         'if', 'else', 'for', 'while',
         'int', 'float', 'string',
-        'import', 'export', 'from',
+        'import', 'export', 'from', 'in',
         'undefined'
     ].join('|')
     const keywords = new RegExp(`\\b(?:${_keywords})\\b`)
@@ -33,7 +35,7 @@ function highlightSyntax() {
     const comments = /(?:\/\/|#).*?(?=\n|$)/
     const blockComments = /\/\*[\s\S]*?\*\//
     const regx = /\/.+\//
-    const strings = /'.*?'|".*?"|`.*?`|true|false|return/
+    const strings = /'.*?'|".*?"|`.*?`|true|false|return|this|new|async|await/
 
     const templVars = /\${(.*?)}/g
 
