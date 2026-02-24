@@ -37,7 +37,7 @@ function highlightSyntax() {
     const regx = /\/.+\//;
     const strings = /'.*?'|".*?"|`.*?`|true|false|return|this|new|async|await/;
 
-    const templVars = /\${(.*?)}/g;
+    const templVars = /\${.*?}/;
 
     const combinedPattern = new RegExp(
         `(${keywords.source})|` +
@@ -47,7 +47,8 @@ function highlightSyntax() {
         `(${comments.source})|` +
         `(${blockComments.source})|` +
         `(${regx.source})|` +
-        `(${strings.source})`, 'gi'
+        `(${strings.source})|` +
+        `(${templVars.source})`, 'gi'
     );
 
     // matching and applying styles and colors ---------------------------------
@@ -64,11 +65,8 @@ function highlightSyntax() {
         }
 
         let content = codeBlock.innerHTML;
-        content = content.replace(templVars, (_match, innerContent) => {
-            return `\${<span style="color: ${blue}">${innerContent}</span>}`;
-        });
 
-        content = content.replace(combinedPattern, (match, keywords, numbers, functions, xmlTags, comments, blockComments, regx, strings) => {
+        content = content.replace(combinedPattern, (match, keywords, numbers, functions, xmlTags, comments, blockComments, regx, strings, templVarsMatch) => {
             if (keywords) return `<span style="color: ${blue};">${keywords}</span>`;
             if (numbers) return `<span style="color: ${green}">${numbers}</span>`;
             if (functions) return `<span style="color: ${blue};">${functions}</span>`;
@@ -77,6 +75,7 @@ function highlightSyntax() {
             if (blockComments) return `<span style="color: ${grey};">${blockComments}</span>`;
             if (regx) return `<span style="color: ${grey};">${regx}</span>`;
             if (strings) return `<span style="color: ${pink}">${strings}</span>`;
+            if (templVarsMatch) return `\${<span style="color: ${blue}">${templVarsMatch.slice(2, -1)}</span>}`;
             return match;
         });
 
