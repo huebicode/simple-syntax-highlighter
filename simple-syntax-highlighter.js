@@ -13,7 +13,7 @@ function highlightSyntax() {
     const green = '#7ea';
     const blue = '#6bf';
     const pink = '#f69';
-    const grey = '#777';
+    const grey = '#999';
     const foreground = '#dde';
     const background = '#222';
 
@@ -30,7 +30,7 @@ function highlightSyntax() {
     const keywords = new RegExp(`\\b(?:${_keywords})\\b`);
 
     const numbers = /\d+(?:\.\d+)?/;
-    const functions = /\b\w+\s*(?=\()/;
+    const functions = /\b[\w-]+\s*(?=\()/;
     const xmlTags = /(?<=&lt;\/?)\w+/;
     const comments = /(?:\/\/|#).*?(?=\n|$)/;
     const blockComments = /\/\*[\s\S]*?\*\//;
@@ -59,9 +59,9 @@ function highlightSyntax() {
             preElement.style.backgroundColor = background;
             preElement.style.color = foreground;
             preElement.style.padding = '1rem';
-            preElement.style.borderRadius = '5px';
+            preElement.style.borderRadius = '4px';
             preElement.style.whiteSpace = 'pre-wrap';
-            preElement.style.overflowWrap = 'break-word';
+            preElement.style.wordBreak = 'break-all';
         }
 
         let content = codeBlock.innerHTML;
